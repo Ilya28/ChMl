@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class MainWindow extends javax.swing.JFrame {
+
     public MainWindow() {
         initComponents();
     }
@@ -30,16 +31,17 @@ public class MainWindow extends javax.swing.JFrame {
         DRQ = new javax.swing.JSpinner();
         DRBtnOK = new javax.swing.JButton();
         DRBtnDel = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
+        pnlBackground = new javax.swing.JPanel();
         ScrPanel = new Scr();
-        Tools = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        pnlTools = new javax.swing.JPanel();
+        pnlRedraw = new javax.swing.JPanel();
         btnRedraw = new javax.swing.JButton();
         btnFastRedraw = new javax.swing.JButton();
-        jSlider2 = new javax.swing.JSlider();
-        jPanel4 = new javax.swing.JPanel();
+        slRFP = new javax.swing.JSlider();
+        pnlChrgMouse = new javax.swing.JPanel();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jToggleButton1 = new javax.swing.JToggleButton();
-        jPanel2 = new javax.swing.JPanel();
+        pnlDM = new javax.swing.JPanel();
         DM1 = new javax.swing.JRadioButton();
         DM2 = new javax.swing.JRadioButton();
         DM3 = new javax.swing.JRadioButton();
@@ -51,7 +53,7 @@ public class MainWindow extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        mbMain = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
@@ -214,11 +216,19 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        jPanel5.setBackground(new java.awt.Color(153, 153, 153));
+        pnlBackground.setBackground(new java.awt.Color(153, 153, 153));
 
         ScrPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         ScrPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         ScrPanel.setCursor(cursor);
+        ScrPanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                ScrPanelMouseDragged(evt);
+            }
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                ScrPanelMouseMoved(evt);
+            }
+        });
         ScrPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ScrPanelMouseClicked(evt);
@@ -229,35 +239,35 @@ public class MainWindow extends javax.swing.JFrame {
         ScrPanel.setLayout(ScrPanelLayout);
         ScrPanelLayout.setHorizontalGroup(
             ScrPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 544, Short.MAX_VALUE)
+            .addGap(0, 467, Short.MAX_VALUE)
         );
         ScrPanelLayout.setVerticalGroup(
             ScrPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlBackgroundLayout = new javax.swing.GroupLayout(pnlBackground);
+        pnlBackground.setLayout(pnlBackgroundLayout);
+        pnlBackgroundLayout.setHorizontalGroup(
+            pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBackgroundLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ScrPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        pnlBackgroundLayout.setVerticalGroup(
+            pnlBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBackgroundLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(ScrPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPanel3.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel3.setToolTipText(" ");
-        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        pnlRedraw.setBackground(new java.awt.Color(102, 102, 102));
+        pnlRedraw.setToolTipText(" ");
+        pnlRedraw.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel3MouseClicked(evt);
+                pnlRedrawMouseClicked(evt);
             }
         });
 
@@ -287,50 +297,80 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        jSlider2.setForeground(new java.awt.Color(102, 102, 102));
-        jSlider2.setMaximum(5);
-        jSlider2.setMinimum(1);
-        jSlider2.setPaintLabels(true);
-        jSlider2.setPaintTicks(true);
-        jSlider2.setToolTipText("");
-        jSlider2.setValue(3);
+        slRFP.setForeground(new java.awt.Color(102, 102, 102));
+        slRFP.setMaximum(6);
+        slRFP.setMinimum(2);
+        slRFP.setPaintLabels(true);
+        slRFP.setPaintTicks(true);
+        slRFP.setToolTipText("");
+        slRFP.setValue(4);
+        slRFP.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                slRFPStateChanged(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlRedrawLayout = new javax.swing.GroupLayout(pnlRedraw);
+        pnlRedraw.setLayout(pnlRedrawLayout);
+        pnlRedrawLayout.setHorizontalGroup(
+            pnlRedrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnRedraw, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnFastRedraw, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(slRFP, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        pnlRedrawLayout.setVerticalGroup(
+            pnlRedrawLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRedrawLayout.createSequentialGroup()
                 .addComponent(btnRedraw, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btnFastRedraw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
-                .addComponent(jSlider2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(slRFP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel4.setBackground(new java.awt.Color(102, 102, 102));
+        pnlChrgMouse.setBackground(new java.awt.Color(102, 102, 102));
 
-        jToggleButton1.setText("jToggleButton1");
+        jFormattedTextField1.setBackground(new java.awt.Color(102, 102, 102));
+        jFormattedTextField1.setForeground(new java.awt.Color(255, 255, 255));
+        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        jFormattedTextField1.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jFormattedTextField1.setText("1.000");
+        jFormattedTextField1.setAlignmentX(0.0F);
+        jFormattedTextField1.setAlignmentY(0.0F);
+        jFormattedTextField1.setPreferredSize(new java.awt.Dimension(34, 29));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+        jToggleButton1.setBackground(new java.awt.Color(51, 51, 51));
+        jToggleButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img_cur.png"))); // NOI18N
+        jToggleButton1.setText(" like charge");
+        jToggleButton1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jToggleButton1.setMargin(new java.awt.Insets(2, 6, 2, 6));
+        jToggleButton1.setMaximumSize(new java.awt.Dimension(87, 27));
+        jToggleButton1.setMinimumSize(new java.awt.Dimension(87, 0));
+        jToggleButton1.setPreferredSize(new java.awt.Dimension(87, 30));
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlChrgMouseLayout = new javax.swing.GroupLayout(pnlChrgMouse);
+        pnlChrgMouse.setLayout(pnlChrgMouseLayout);
+        pnlChrgMouseLayout.setHorizontalGroup(
+            pnlChrgMouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlChrgMouseLayout.createSequentialGroup()
+                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToggleButton1)
+        pnlChrgMouseLayout.setVerticalGroup(
+            pnlChrgMouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlChrgMouseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
+        pnlDM.setBackground(new java.awt.Color(102, 102, 102));
 
         DM1.setBackground(new java.awt.Color(102, 102, 102));
         bgDrawModeSelect.add(DM1);
@@ -380,21 +420,21 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnlDMLayout = new javax.swing.GroupLayout(pnlDM);
+        pnlDM.setLayout(pnlDMLayout);
+        pnlDMLayout.setHorizontalGroup(
+            pnlDMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(DM1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(DM3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(DM2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(pnlDMLayout.createSequentialGroup()
                 .addComponent(slDrawMode, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(DM4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        pnlDMLayout.setVerticalGroup(
+            pnlDMLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDMLayout.createSequentialGroup()
                 .addComponent(DM1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(DM2)
@@ -416,6 +456,11 @@ public class MainWindow extends javax.swing.JFrame {
         slLoF.setMaximum(64);
         slLoF.setMinimum(4);
         slLoF.setValue(16);
+        slLoF.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                slLoFStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlLoFLayout = new javax.swing.GroupLayout(pnlLoF);
         pnlLoF.setLayout(pnlLoFLayout);
@@ -471,39 +516,41 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(jRadioButton2))
         );
 
-        javax.swing.GroupLayout ToolsLayout = new javax.swing.GroupLayout(Tools);
-        Tools.setLayout(ToolsLayout);
-        ToolsLayout.setHorizontalGroup(
-            ToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ToolsLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnlToolsLayout = new javax.swing.GroupLayout(pnlTools);
+        pnlTools.setLayout(pnlToolsLayout);
+        pnlToolsLayout.setHorizontalGroup(
+            pnlToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlDM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlChrgMouse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlRedraw, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlToolsLayout.createSequentialGroup()
                 .addComponent(pnlLoF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        ToolsLayout.setVerticalGroup(
-            ToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ToolsLayout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        pnlToolsLayout.setVerticalGroup(
+            pnlToolsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlToolsLayout.createSequentialGroup()
+                .addComponent(pnlRedraw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlDM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlLoF, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addComponent(pnlChrgMouse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        jMenuBar1.setBackground(new java.awt.Color(102, 102, 102));
-        jMenuBar1.setBorder(null);
+        mbMain.setBackground(new java.awt.Color(102, 102, 102));
+        mbMain.setBorder(null);
 
+        jMenu1.setBackground(new java.awt.Color(102, 102, 102));
         jMenu1.setText("File");
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setBackground(new java.awt.Color(102, 102, 102));
         jMenuItem1.setText("Новый проект");
         jMenu1.add(jMenuItem1);
         jMenu1.add(jSeparator1);
@@ -515,7 +562,7 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuItem3.setText("Закрыть");
         jMenu1.add(jMenuItem3);
 
-        jMenuBar1.add(jMenu1);
+        mbMain.add(jMenu1);
 
         jMenu2.setText("Edit");
 
@@ -532,7 +579,7 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuItem6.setText("Удалить");
         jMenu2.add(jMenuItem6);
 
-        jMenuBar1.add(jMenu2);
+        mbMain.add(jMenu2);
 
         jMenu3.setText("Service");
 
@@ -547,26 +594,26 @@ public class MainWindow extends javax.swing.JFrame {
         jMenuItem8.setText("Скриншот");
         jMenu3.add(jMenuItem8);
 
-        jMenuBar1.add(jMenu3);
+        mbMain.add(jMenu3);
 
         jMenu4.setText("About");
-        jMenuBar1.add(jMenu4);
+        mbMain.add(jMenu4);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(mbMain);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnlBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(Tools, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(pnlTools, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Tools, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlTools, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -576,39 +623,37 @@ public class MainWindow extends javax.swing.JFrame {
         // Помещаем заряды
     }//GEN-LAST:event_formMouseClicked
 
-    
     static SettingsWindow wndSettings;
     static boolean tester = false;
     static boolean redrawAll = false;
+    static boolean redrawFast = false;
+    static int RFP = 1;
     static int FT = 1;
     static int DM = 2;
     static int CMV = 50;
     int ClcX = 0;
     int ClcY = 0;
     static Cursor cursor;
-    
+
     private void ScrPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ScrPanelMouseClicked
-        if (evt.getButton() == 1)
-        {
+        if (evt.getButton() == 1) {
             QVDialog.setLocation(
-                    evt.getX() + DVQ.getLocation().x + super.getLocation().x - 10, 
+                    evt.getX() + DVQ.getLocation().x + super.getLocation().x - 10,
                     evt.getY() + DVQ.getLocation().y + super.getLocation().y - 40);
             QVDialog.setVisible(true);
             ClcX = evt.getX();
             ClcY = evt.getY();
-        }
-        else
-        {
-            for (int i = 0; i < Charges.count; i++)
+        } else {
+            for (int i = 0; i < Charges.count; i++) {
                 Charges.arr[i].selected = false;
+            }
             int num = Charges.numCTC(evt.getX(), evt.getY(), 4);
-            if (num >= 0)
-            {
+            if (num >= 0) {
                 Charges.arr[num].selected = true;
             }
             ScrPanel.repaint();
         }
-            //tester = !tester;
+        //tester = !tester;
         //ScrPanel.repaint(); 
     }//GEN-LAST:event_ScrPanelMouseClicked
 
@@ -617,7 +662,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_DBtnCancelActionPerformed
 
     private void DBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DBtnOKActionPerformed
-        Charges.add(ClcX - 2, ClcY - 2, (float)DVQ.getValue()); 
+        Charges.add(ClcX - 2, ClcY - 2, (float) DVQ.getValue());
         QVDialog.setVisible(false);
         ScrPanel.repaint();
     }//GEN-LAST:event_DBtnOKActionPerformed
@@ -638,13 +683,16 @@ public class MainWindow extends javax.swing.JFrame {
         DM = 3;
     }//GEN-LAST:event_DM3ActionPerformed
 
-    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+    private void pnlRedrawMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlRedrawMouseClicked
         redrawAll = true;
         ScrPanel.repaint();
-    }//GEN-LAST:event_jPanel3MouseClicked
+    }//GEN-LAST:event_pnlRedrawMouseClicked
 
     private void btnFastRedrawActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFastRedrawActionPerformed
-        // TODO add your handling code here:
+        redrawFast = true;
+        redrawAll = true;
+        RFP = slRFP.getValue();
+        ScrPanel.repaint();
     }//GEN-LAST:event_btnFastRedrawActionPerformed
 
     private void btnRedrawActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRedrawActionPerformed
@@ -665,13 +713,13 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_DM4ActionPerformed
 
     private void DRBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DRBtnOKActionPerformed
-        Charges.add(ClcX - 2, ClcY - 2, (float)DVQ.getValue()); 
+        Charges.add(ClcX - 2, ClcY - 2, (float) DVQ.getValue());
         QVDialog.setVisible(false);
-        ScrPanel.repaint();   
+        ScrPanel.repaint();
     }//GEN-LAST:event_DRBtnOKActionPerformed
 
     private void DRBtnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DRBtnDelActionPerformed
-        Charges.add(ClcX - 2, ClcY - 2, (float)DVQ.getValue()); 
+        Charges.add(ClcX - 2, ClcY - 2, (float) DVQ.getValue());
         QVDialog.setVisible(false);
         ScrPanel.repaint();
     }//GEN-LAST:event_DRBtnDelActionPerformed
@@ -681,13 +729,56 @@ public class MainWindow extends javax.swing.JFrame {
         wndSettings.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
+    private void slLoFStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_slLoFStateChanged
+
+    }//GEN-LAST:event_slLoFStateChanged
+
+    private void slRFPStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_slRFPStateChanged
+        RFP = slRFP.getValue();
+    }//GEN-LAST:event_slRFPStateChanged
+
+    boolean MLC = false;
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        MLC = !MLC;
+        if (MLC) {
+            Charges.arr[0].v = 1;
+            Charges.arr[0].del = false;
+        } else {
+            Charges.arr[0].v = 0;
+            Charges.arr[0].del = true;
+        }
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void ScrPanelMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ScrPanelMouseDragged
+       /* if (MLC) {
+            redrawFast = true;
+            redrawAll = true;
+            RFP = slRFP.getValue();
+            Charges.arr[0].x = evt.getX();
+            Charges.arr[0].y = evt.getY();
+            ScrPanel.repaint();
+        } */
+    }//GEN-LAST:event_ScrPanelMouseDragged
+
+    private void ScrPanelMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ScrPanelMouseMoved
+        if (MLC) {
+            redrawFast = true;
+            redrawAll = true;
+            RFP = slRFP.getValue();
+            Charges.arr[0].x = evt.getX();
+            Charges.arr[0].y = evt.getY();
+            ScrPanel.repaint();
+        }
+    }//GEN-LAST:event_ScrPanelMouseMoved
+
     static Chrgs Charges;
+
     public static void main(String args[]) {
-        
-        Toolkit toolkit = Toolkit.getDefaultToolkit();  
-        Image image = toolkit.getImage("chml_cross.gif");   
-        cursor = toolkit.createCustomCursor(image, new Point(13, 13), "Pencil");  
-        
+
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Image image = toolkit.getImage("chml_cross.gif");
+        cursor = toolkit.createCustomCursor(image, new Point(13, 13), "Pencil");
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -710,19 +801,21 @@ public class MainWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-  
+
         Charges = new Chrgs();
-        
+        Charges.add(-10, -10, 0);
+        Charges.arr[0].del = true;
+
         /* Create and display the form */
         wndSettings = new SettingsWindow();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainWindow().setVisible(true);       
+                new MainWindow().setVisible(true);
             }
-        });  
+        });
     }
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DBtnCancel;
     private javax.swing.JButton DBtnOK;
@@ -737,18 +830,17 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JDialog QRDialog;
     private javax.swing.JDialog QVDialog;
     public javax.swing.JPanel ScrPanel;
-    private javax.swing.JPanel Tools;
     private javax.swing.ButtonGroup bgDrawModeSelect;
     private javax.swing.ButtonGroup bgFieldTypeSelect;
     private javax.swing.JButton btnFastRedraw;
     private javax.swing.JButton btnRedraw;
     private javax.swing.JCheckBox cbLoF;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
@@ -758,20 +850,22 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
-    private javax.swing.JSlider jSlider2;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JMenuBar mbMain;
+    private javax.swing.JPanel pnlBackground;
+    private javax.swing.JPanel pnlChrgMouse;
+    private javax.swing.JPanel pnlDM;
     private javax.swing.JPanel pnlLoF;
     private javax.swing.JPanel pnlQPosNeg;
+    private javax.swing.JPanel pnlRedraw;
+    private javax.swing.JPanel pnlTools;
     private javax.swing.JSlider slDrawMode;
     private javax.swing.JSlider slLoF;
+    private javax.swing.JSlider slRFP;
     // End of variables declaration//GEN-END:variables
 }
